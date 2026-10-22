@@ -1,26 +1,29 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-argon-config
-PKG_VERSION:=1.0
-PKG_RELEASE:=20230608
+PKG_VERSION:=2.0.0
+PKG_RELEASE:=1
+PKG_LICENSE:=Apache-2.0
 
 PKG_MAINTAINER:=jerrykuku <jerrykuku@qq.com>
 
 LUCI_TITLE:=LuCI app for Argon theme configuration
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+luci-theme-argon
+LUCI_BASENAME:=argon-config-app
+LUCI_DEPENDS:=+luci-base +luci-theme-argon +rpcd-mod-file +cgi-io +jshn
 
-define Package/$(PKG_NAME)/conffiles
-/etc/config/argon
-endef
+# Keep APK translation versions valid even outside a Git checkout.
+PKG_PO_VERSION:=$(PKG_VERSION)-r$(PKG_RELEASE)
 
-define Build/Compile
-	@mkdir -p $(PKG_BUILD_DIR)/po/ru
-	@if [ -f "Package/$(PKG_NAME)/po/ru/argon-config.po" ]; then \
-		$(STAGING_DIR_HOSTPKG)/bin/po2lmo \
-			"Package/$(PKG_NAME)/po/ru/argon-config.po" \
-			"$(PKG_BUILD_DIR)/po/ru/argon-config.lmo"; \
-	fi
+define Package/$(PKG_NAME)/preinst
+#!/bin/sh
+root="$${IPKG_INSTROOT}"
+if [ -f "$$root/etc/config/argon" ]; then
+	umask 077
+	mkdir -p "$$root/etc/argon-config-app-migration" || exit 1
+	cp -p "$$root/etc/config/argon" "$$root/etc/argon-config-app-migration/argon" || exit 1
+fi
+exit 0
 endef
 
 include $(TOPDIR)/feeds/luci/luci.mk

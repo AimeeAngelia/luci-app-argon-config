@@ -1,96 +1,74 @@
-<!-- markdownlint-configure-file {
-  "MD013": {
-    "code_blocks": false,
-    "tables": false,
-    "line_length":200
-  },
-  "MD033": false,
-  "MD041": false
-} -->
-
-[license]: /LICENSE
-[license-badge]: https://img.shields.io/github/license/jerrykuku/luci-app-argon-config?style=flat-square&a=1
-[prs]: https://github.com/jerrykuku/luci-app-argon-config/pulls
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[issues]: https://github.com/jerrykuku/luci-app-argon-config/issues/new
-[issues-badge]: https://img.shields.io/badge/Issues-welcome-brightgreen.svg?style=flat-square
-[release]: https://github.com/jerrykuku/luci-app-argon-config/releases
-[release-badge]: https://img.shields.io/github/v/release/jerrykuku/luci-app-argon-config?include_prereleases&style=flat-square
-[download]: https://github.com/jerrykuku/luci-app-argon-config/releases
-[download-badge]: https://img.shields.io/github/downloads/jerrykuku/luci-app-argon-config/total?style=flat-square
-[contact]: https://t.me/jerryk6
-[contact-badge]: https://img.shields.io/badge/Contact-telegram-blue?style=flat-square
-[en-us-link]: /README.md
-[zh-cn-link]: /README_ZH.md
-[en-us-release-log]: /RELEASE.md
-[zh-cn-release-log]: /RELEASE_ZH.md
-[config-link]: https://github.com/jerrykuku/luci-app-argon-config/releases
-[lede]: https://github.com/coolsnowwolf/lede
-[official]: https://github.com/openwrt/openwrt
-[immortalwrt]: https://github.com/immortalwrt/immortalwrt
-
-<div align="center">
-<img src="https://raw.githubusercontent.com/jerrykuku/staff/master/argon_title4.svg">
-
 # Argon 主题设置插件
 
-您可以设置 Argon 主题登录页面的模糊度和透明度，并管理背景图片和视频。
+[English](README.md) | 简体中文
 
-[![license][license-badge]][license]
-[![prs][prs-badge]][prs]
-[![issues][issues-badge]][issues]
-[![release][release-badge]][release]
-[![download][download-badge]][download]
-[![contact][contact-badge]][contact]
+这是基于 [jerrykuku/luci-app-argon-config](https://github.com/jerrykuku/luci-app-argon-config) 持续维护的独立项目，已脱离 GitHub 复刻网络。项目针对当前正式版 OpenWrt 和 JavaScript LuCI 重构，支持 APK 和 IPK。
 
-[Engilish][en-us-link] |
-**简体中文**
+## 兼容性
 
-<img src="https://raw.githubusercontent.com/jerrykuku/staff/master/argon2.gif">
-</div>
+| 系统或主题 | 行为 |
+| --- | --- |
+| OpenWrt 25.12.6 / LuCI 25.12 | 主要目标，SDK 构建 APK |
+| OpenWrt 24.10.8 / LuCI 24.10 | 兼容构建 IPK |
+| Argon 2.x | 使用本插件的“系统 → Argon 主题设置”页面 |
+| Argon 3.x，带 `config-integrated` 标记 | 使用主题内置的设置页面，本插件自动隐藏入口 |
 
-## Branch Introduction
+**Argon 3.0 已内置设置，新安装通常无需此插件。** 本项目的独立页面、RPC、菜单和语言包使用独立名称，避免与新主题争用文件。不会修改主题代码；在线壁纸是否可用由主题实现和网络决定。
 
-目前有两个主要的分支，适应于不同版本的**OpenWrt**源代码。  
-下表为详细的介绍：
+## 功能
 
+- 常规、亮色、暗色设置分栏；校验颜色、透明度和模糊半径。
+- 使用 LuCI 标准的“保存”“保存并应用”“重置”流程。
+- 上传图片、视频，预览背景，确认删除，查看剩余空间。
+- 上传和删除后刷新文件列表，不整页重载，不丢失未保存的表单。
+- 上传重名时拒绝覆盖，失败时显示原因；只读账户不能修改文件。
+- 升级保留现有配置，迁移旧版 `bing_background` 设置。
 
-| 分支   | 版本   | 介绍                        | 匹配源码                                              |
-| ------ | ------ | --------------------------- | ----------------------------------------------------- |
-| master | v1.x.x | 支持最新和比较新版本的 LuCI | [官方 OpenWrt][official] • [ImmortalWrt][immortalwrt] |
-| 18.06  | v0.9.x | 支持 18.06 版本的 LuCI      | [Lean's LEDE][lede]                                                 |
+## 安装与升级
 
-## G快速开始
+先备份配置，并安装与你系统兼容的 Argon 主题：
 
-### 使用 Lean's LEDE 构建
-
-```bash
-cd lede/package/lean
-rm -rf luci-app-argon-config # if have
-git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config.git luci-app-argon-config
-make menuconfig #choose LUCI->Application->Luci-app-argon-config
-make -j1 V=s
+```sh
+cp -p /etc/config/argon /tmp/argon.backup
 ```
 
-### 使用官方 OpenWrt SnapShots 和 ImmortalWrt 构建
+从本仓库 [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) 下载成功构建的附件，解压后上传到路由器 `/tmp`。正式发布后也可从 [Releases](https://github.com/AimeeAngelia/luci-app-argon-config/releases) 下载。
 
-```bash
-cd openwrt/package
-git clone https://github.com/jerrykuku/luci-app-argon-config.git
-make menuconfig #choose LUCI->Application->Luci-app-argon-config
-make -j1 V=s
+OpenWrt 25.12：
+
+```sh
+apk add --allow-untrusted /tmp/luci-app-argon-config-2.0.0-r1.apk
+# 可选：简体中文语言包，文件名以实际产物为准
+apk add --allow-untrusted /tmp/luci-i18n-argon-config-app-zh-cn-2.0.0-r1.apk
 ```
 
-## 贡献者
+OpenWrt 24.10：
 
-<a href="https://github.com/jerrykuku/luci-app-argon-config/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=jerrykuku/luci-app-argon-config" />
-</a>
+```sh
+opkg install /tmp/luci-app-argon-config_2.0.0-r1_all.ipk
+opkg install /tmp/luci-i18n-argon-config-app-zh-cn_2.0.0-r1_all.ipk
+```
 
-Made with [contrib.rocks](https://contrib.rocks).
+语言包名称改为 `luci-i18n-argon-config-app-*`，以免与 Argon 3.x 的语言包同名。旧插件升级时，安装脚本会先保存配置，再交给新的初始化脚本恢复。使用新版主题时也保留配置；主题负责自己的配置文件。
 
-## 相关项目
+安装后重新登录 LuCI。旧主题的入口路径为 `/cgi-bin/luci/admin/system/argon-config-app`。若使用本地背景，将壁纸来源设为“本地背景”，再点击“保存并应用”。有多张背景时由主题随机选择。
 
-- [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon): Argon theme
-- [openwrt-package](https://github.com/jerrykuku/openwrt-package): My OpenWrt package
-- [CasaOS](https://github.com/IceWhaleTech/CasaOS): A simple, easy-to-use, elegant open-source Personal Cloud system (My current main project)
+插件不会负责把旧 Argon 2.x 主题迁移成 Argon 3.x；升级主题请遵循[主题的迁移说明](https://github.com/jerrykuku/luci-theme-argon#readme)。
+
+## 从源码构建
+
+放入匹配版本的 OpenWrt SDK/buildroot，另行加入 Argon 主题源码：
+
+```sh
+git clone https://github.com/AimeeAngelia/luci-app-argon-config.git package/luci-app-argon-config
+make menuconfig  # LuCI → Applications → luci-app-argon-config
+make package/luci-app-argon-config/compile V=s
+```
+
+生成 APK 或 IPK 由 SDK 决定，不要手工改扩展名。不要同时加入 Argon 3 源码下同名的 `compat/luci-app-argon-config` 迁移包。
+
+Docker 构建及验证方法见 [开发说明](docs/DEVELOPMENT.md)。CI 同时构建两种格式；发布工作流仅生成草稿发行。
+
+## 致谢
+
+基于 Jerrykuku 和原项目贡献者的工作，沿用 Apache-2.0 许可证。Argon 主题由[上游项目](https://github.com/jerrykuku/luci-theme-argon)维护。

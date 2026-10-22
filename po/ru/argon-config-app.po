@@ -1,0 +1,218 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-argon-config 2.0.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Action"
+msgstr "Действие"
+
+msgid "Argon Config"
+msgstr "тема Argon"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:131
+msgid "Argon theme configuration"
+msgstr "Конфигурация темы Argon"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:149
+msgid "Bing"
+msgstr "Bing"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:138
+#: htdocs/luci-static/resources/view/argon-config-app.js:143
+msgid "Dark mode"
+msgstr "Тёмная тема"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:95
+#: htdocs/luci-static/resources/view/argon-config-app.js:124
+msgid "Delete"
+msgstr "Удалить"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:44
+#, javascript-format
+msgid "Expecting: %s"
+msgstr "Ожидалось: %s"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Filename"
+msgstr "Имя файла"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:141
+msgid "Follow system"
+msgstr "Как в системе"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:137
+#: htdocs/luci-static/resources/view/argon-config-app.js:142
+msgid "Light mode"
+msgstr "Светлая тема"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Modified date"
+msgstr "Дата изменения"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:127
+msgid "No files found."
+msgstr "Файлы не найдены."
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Size"
+msgstr "Размер"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:133
+msgid "Theme configuration"
+msgstr "Конфигурация темы"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:140
+msgid "Theme mode"
+msgstr "Режим темы"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:150
+msgid "Unsplash"
+msgstr "Unsplash"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:198
+msgid "Upload background"
+msgstr "Загрузить фон"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:151
+msgid "Wallhaven"
+msgstr "Wallhaven"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:147
+msgid "Wallpaper source"
+msgstr "Обои"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:44
+msgid "valid HEX color value"
+msgstr "корректное значение HEX-цвета"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:21
+msgid "Invalid filename."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:22
+#: htdocs/luci-static/resources/view/argon-config-app.js:67
+#: htdocs/luci-static/resources/view/argon-config-app.js:193
+msgid "Supported formats: GIF, JPEG, PNG, WebP, MP4 and WebM."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:23
+msgid "The uploaded file is missing or empty. Please upload it again."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:24
+msgid ""
+"A file with this name already exists. Rename the file or delete the old one "
+"first."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:25
+msgid "The operation failed. Check free space and directory permissions."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:28
+msgid "The operation failed. Please try again."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:56
+#: htdocs/luci-static/resources/view/argon-config-app.js:184
+msgid "Available space: %1024.2mB"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:57
+#: htdocs/luci-static/resources/view/argon-config-app.js:184
+msgid "Available space: unknown"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:70
+msgid ""
+"Background uploaded. Select the local wallpaper source and save to use it."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:74
+msgid "Upload has been cancelled"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:82
+msgid "Delete background"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:83
+#, javascript-format
+msgid "Delete \"%s\"? This cannot be undone."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:85
+msgid "Cancel"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:107
+msgid "Close"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:120
+msgid "Preview"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:132
+msgid ""
+"Customize the login page and manage local backgrounds. Changes take effect "
+"after Save & Apply."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:136
+msgid "General"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:148
+msgid "Local backgrounds (built-in if empty)"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:164
+msgid "Primary color"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:166
+msgid "Use a HEX color such as #5e72e4 or #fff."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:169
+msgid "Transparency"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:172
+msgid "0 is transparent; 1 is opaque."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:174
+msgid "Frosted glass radius"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:177
+msgid "Blur radius in pixels, from 0 to 100."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:192
+msgid "Local backgrounds"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:194
+msgid ""
+"Uploads and deletions take effect immediately and do not discard unsaved "
+"theme settings."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:201
+msgid "Refresh"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:152
+msgid ""
+"Local backgrounds are selected randomly. Online sources require Internet "
+"access."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:156
+msgid "Unsplash API key"
+msgstr ""

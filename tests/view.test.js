@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const source = fs.readFileSync('htdocs/luci-static/resources/view/argon-config-app.js', 'utf8');
 
 function loadView(writable = true) {
-	const state = { notifications: [], removed: [], calls: [], options: [], files: [], uploads: [], rows: [] };
+	const state = { notifications: [], removed: [], calls: [], options: [], files: [], uploads: [], rows: [], config: {}, values: {} };
 	function E(tag, attrs, children) {
 		if (arguments.length < 3 && (Array.isArray(attrs) || typeof attrs === 'string' || attrs?.tag)) {
 			children = attrs; attrs = {};
@@ -18,7 +18,12 @@ function loadView(writable = true) {
 			return {
 				tab() {},
 				taboption(tab, type, name) {
-					const option = { name, tab, value() {}, depends() {} };
+					const option = {
+						name, option: name, tab, dependencies: [], value() {},
+						depends(...args) { this.dependencies.push(args); },
+						cfgvalue(id) { return state.config[id]?.[name]; },
+						formvalue(id) { return state.values[id]?.[name] ?? this.cfgvalue(id) ?? this.default ?? ''; }
+					};
 					state.options.push(option);
 					return option;
 				}
@@ -35,8 +40,13 @@ function loadView(writable = true) {
 			resource: path => '/luci-static/resources/' + path
 		},
 		view: { extend: obj => obj },
-		form: { Map, TypedSection: 'TypedSection', ListValue: 'ListValue', Value: 'Value' },
-		uci: { load: async () => { state.loaded = true; } },
+		form: { Map, TypedSection: 'TypedSection', ListValue: 'ListValue', Value: 'Value', Flag: 'Flag' },
+		uci: {
+			load: async () => { state.loaded = true; },
+			get: (config, id, name) => state.config[id]?.[name],
+			set: (config, id, name, value) => { (state.config[id] ||= {})[name] = value; },
+			unset: (config, id, name) => { delete (state.config[id] || {})[name]; }
+		},
 		fs: {
 			list: async () => { if (state.listError) throw state.listError; return state.files; },
 			remove: async path => state.removed.push(path)
@@ -156,4 +166,72 @@ test('mutating RPC calls belong exclusively to the write ACL', () => {
 	assert.deepEqual(acl.read.ubus['luci.argon_config'], ['avail']);
 	assert.deepEqual(acl.write.ubus['luci.argon_config'], ['install', 'remove']);
 	assert.deepEqual(Object.keys(acl.write.file), ['/tmp/argon-config-upload-*']);
+});
+
+test('encoded wallpaper settings load from the actual anonymous section without truncating IDs', async () => {
+	const s = loadView(); await s.render();
+	const option = name => s.options.find(o => o.name === name);
+	s.config.cfg04a19 = { online_wallpaper: 'unsplash_317099,a_b-C', unsplash_collection: 'stale' };
+	assert.equal(option('online_wallpaper').cfgvalue('cfg04a19'), 'unsplash');
+	assert.equal(option('unsplash_collection').cfgvalue('cfg04a19'), '317099,a_b-C');
+	s.config.cfg04a19.online_wallpaper = 'wallhaven_37';
+	assert.equal(option('online_wallpaper').cfgvalue('cfg04a19'), 'wallhaven');
+	assert.equal(option('wallhaven_tag').cfgvalue('cfg04a19'), '37');
+});
+
+test('changing only a collection filter updates the theme setting and clearing it selects random photos', async () => {
+	const s = loadView(); await s.render();
+	const source = s.options.find(o => o.name === 'online_wallpaper');
+	s.config.cfg0123 = { online_wallpaper: 'unsplash_317099' };
+	s.values.cfg0123 = { online_wallpaper: 'unsplash', unsplash_collection: ' 123 , a_b-C ', wallhaven_tag: '' };
+	assert.equal(source.forcewrite, true);
+	source.write('cfg0123', 'unsplash');
+	assert.equal(s.config.cfg0123.online_wallpaper, 'unsplash_123,a_b-C');
+	assert.equal(s.config.cfg0123.unsplash_collection, '123,a_b-C');
+	s.values.cfg0123.unsplash_collection = '';
+	source.write('cfg0123', 'unsplash');
+	assert.equal(s.config.cfg0123.online_wallpaper, 'unsplash');
+	assert.equal(s.config.cfg0123.unsplash_collection, undefined);
+});
+
+test('switching sources preserves each provider filter, including a legacy encoded collection', async () => {
+	const s = loadView(); await s.render();
+	const source = s.options.find(o => o.name === 'online_wallpaper');
+	s.config.cfg0123 = { online_wallpaper: 'unsplash_317099', wallhaven_tag: '37' };
+	source.write('cfg0123', 'bing');
+	assert.equal(s.config.cfg0123.online_wallpaper, 'bing');
+	assert.equal(s.config.cfg0123.unsplash_collection, '317099');
+	assert.equal(s.config.cfg0123.wallhaven_tag, '37');
+	source.write('cfg0123', 'wallhaven');
+	assert.equal(s.config.cfg0123.online_wallpaper, 'wallhaven_37');
+});
+
+test('filter validation rejects URLs, query injection and wallpaper IDs in the tag field', async () => {
+	const s = loadView(); await s.render();
+	const collections = s.options.find(o => o.name === 'unsplash_collection');
+	const tag = s.options.find(o => o.name === 'wallhaven_tag');
+	for (const value of ['', '317099', '123, a_b-C']) assert.equal(collections.validate('cfg', value), true);
+	for (const value of ['https://unsplash.com/collections/123', '1&client_id=x', '1,,2', '123/456'])
+		assert.notEqual(collections.validate('cfg', value), true);
+	for (const value of ['', '37', '12345']) assert.equal(tag.validate('cfg', value), true);
+	for (const value of ['0', 'yqg6r7', '37,38', '-1', '1&apikey=x']) assert.notEqual(tag.validate('cfg', value), true);
+});
+
+test('API keys are required for Unsplash and optional for Wallhaven tag searches', async () => {
+	const s = loadView(); await s.render();
+	const key = s.options.find(o => o.name === 'use_api_key');
+	s.values.cfg = { online_wallpaper: 'unsplash' };
+	assert.notEqual(key.validate('cfg', ''), true);
+	assert.notEqual(key.validate('cfg', '  '), true);
+	assert.equal(key.validate('cfg', 'test-access-key'), true);
+	s.values.cfg.online_wallpaper = 'wallhaven';
+	assert.equal(key.validate('cfg', ''), true);
+	assert.equal(key.password, true);
+	assert.equal(key.retain, true);
+	const resolution = s.options.find(o => o.name === 'use_exact_resolution');
+	assert.equal(resolution.default, '1');
+	const condition = resolution.dependencies[0][0];
+	assert.equal(condition.online_wallpaper, 'wallhaven');
+	assert.equal(condition.wallhaven_tag.test('37'), true);
+	assert.equal(condition.wallhaven_tag.test(''), false);
 });

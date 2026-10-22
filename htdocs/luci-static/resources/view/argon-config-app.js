@@ -44,6 +44,77 @@ function validateColor(section, value) {
 	return /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(value) || _('Expecting: %s').format(_('valid HEX color value'));
 }
 
+function wallpaperSetting(section) {
+	var value = uci.get('argon', section, 'online_wallpaper') || 'none';
+	var match = /^(unsplash|wallhaven)_(.*)$/.exec(value);
+	return match ? { source: match[1], filter: match[2] } : { source: value, filter: '' };
+}
+
+function normalizeFilter(value) {
+	return String(value || '').split(',').map(function(id) { return id.trim(); }).join(',');
+}
+
+function addWallpaperOptions(section) {
+	var source = section.taboption('general', form.ListValue, 'online_wallpaper', _('Wallpaper source'));
+	source.value('none', _('Local backgrounds (built-in if empty)'));
+	source.value('bing', _('Bing'));
+	source.value('unsplash', _('Unsplash'));
+	source.value('wallhaven', _('Wallhaven'));
+	source.description = _('Local backgrounds are selected randomly. Online sources require Internet access.');
+	source.default = 'none';
+	source.rmempty = false;
+	source.cfgvalue = function(id) { return wallpaperSetting(id).source; };
+	// A filter can change while the source stays the same.
+	source.forcewrite = true;
+
+	var filters = ['unsplash', 'wallhaven'].map(function(provider) {
+		var name = provider === 'unsplash' ? 'unsplash_collection' : 'wallhaven_tag';
+		var option = section.taboption('general', form.Value, name,
+			provider === 'unsplash' ? _('Unsplash collection IDs (optional)') : _('Wallhaven tag ID (optional)'));
+		option.depends('online_wallpaper', provider);
+		option.retain = true;
+		option.description = provider === 'unsplash'
+			? _('Enter public collection IDs separated by commas. Leave empty for random photos.')
+			: _('Enter one numeric tag ID, not a wallpaper ID. A tag enables the API key and resolution options below.');
+		option.cfgvalue = function(id) {
+			var setting = wallpaperSetting(id);
+			return setting.source === provider ? setting.filter : (uci.get('argon', id, name) || '');
+		};
+		option.validate = function(id, value) {
+			value = normalizeFilter(value);
+			return !value || (provider === 'unsplash' ? /^[A-Za-z0-9_-]+(?:,[A-Za-z0-9_-]+)*$/ : /^[1-9][0-9]*$/).test(value)
+				|| (provider === 'unsplash' ? _('Use collection IDs separated by commas, without URLs.') : _('Use one positive numeric tag ID.'));
+		};
+		option.write = function(id, value) { uci.set('argon', id, name, normalizeFilter(value)); };
+		return option;
+	});
+	source.write = function(id, value) {
+		var values = filters.map(function(option) { return normalizeFilter(option.formvalue(id)); });
+		filters.forEach(function(option, index) {
+			if (values[index]) uci.set('argon', id, option.option, values[index]);
+			else uci.unset('argon', id, option.option);
+		});
+		var filter = value === 'unsplash' ? values[0] : value === 'wallhaven' ? values[1] : '';
+		uci.set('argon', id, 'online_wallpaper', value + (filter ? '_' + filter : ''));
+	};
+
+	var key = section.taboption('general', form.Value, 'use_api_key', _('Wallpaper API key'));
+	key.password = true;
+	key.retain = true;
+	key.depends('online_wallpaper', 'unsplash');
+	key.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^[1-9][0-9]*$/ });
+	key.description = _('Unsplash requires its Access Key. For a Wallhaven tag search, use a Wallhaven API key or leave empty.');
+	key.validate = function(id, value) {
+		return source.formvalue(id) !== 'unsplash' || !!String(value || '').trim() || _('An Unsplash Access Key is required.');
+	};
+	var resolution = section.taboption('general', form.Flag, 'use_exact_resolution', _('Require exact resolution for Wallhaven'));
+	resolution.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^[1-9][0-9]*$/ });
+	resolution.default = '1';
+	resolution.rmempty = false;
+	resolution.retain = true;
+	resolution.description = _('For tag searches: require 1920x1080, or disable to allow images at least 1920x1080.');
+}
+
 return view.extend({
 	load: function() {
 		return Promise.all([uci.load('argon'), callSpace(), listBackgrounds()]);
@@ -144,20 +215,7 @@ return view.extend({
 		o.default = 'normal';
 		o.rmempty = false;
 
-		o = s.taboption('general', form.ListValue, 'online_wallpaper', _('Wallpaper source'));
-		o.value('none', _('Local backgrounds (built-in if empty)'));
-		o.value('bing', _('Bing'));
-		o.value('unsplash', _('Unsplash'));
-		o.value('wallhaven', _('Wallhaven'));
-		o.description = _('Local backgrounds are selected randomly. Online sources require Internet access.');
-		o.default = 'none';
-		o.rmempty = false;
-
-		o = s.taboption('general', form.Value, 'use_api_key', _('Unsplash API key'));
-		o.password = true;
-		o.depends('online_wallpaper', 'unsplash');
-		o.rmempty = false;
-		o.retain = true;
+		addWallpaperOptions(s);
 
 		['light', 'dark'].forEach(function(tab) {
 			var dark = tab === 'dark';

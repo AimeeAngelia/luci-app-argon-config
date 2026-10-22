@@ -1,4 +1,16 @@
-# Validation for 2.0.0
+# Validation
+
+## 2.1.0 wallpaper filters
+
+- All 20 Node tests pass, including anonymous UCI sections, legacy encoded IDs, filter-only edits, clearing filters, provider switching and input validation.
+- Chromium against actual OpenWrt 25.12.6, LuCI and the Argon 2.4.8 package: collection save/reload, Reset, required Unsplash key, optional Wallhaven key, tag validation, exact/minimum resolution, clearing filters and remembered filters pass.
+- The existing browser regression also passes: upload, preview, duplicate/format rejection, delete/cancel, refresh, unsaved values, Reset, Save and Save & Apply.
+- The actual Argon 2.4.8 wallpaper RPC generates the expected Unsplash collection and Wallhaven tag/key/resolution queries using real UCI and simulated HTTP responses. No live provider credentials were used; live image availability is not verified.
+- Simplified Chinese covers all 59 current messages; all six translation catalogs compile.
+
+The optional browser/provider checks are documented in [ONLINE_WALLPAPER.md](ONLINE_WALLPAPER.md). The standalone view remains hidden when the theme provides integrated settings.
+
+## 2.0.0
 
 Tested with the actual stable SDKs and root filesystems for OpenWrt 25.12.6 and 24.10.8.
 

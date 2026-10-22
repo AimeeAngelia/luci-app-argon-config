@@ -50,6 +50,7 @@ const assert = require('node:assert/strict');
 		assert.equal(await key.inputValue(), 'browser-test-access-key');
 
 		await source.selectOption('wallhaven');
+		await tag.fill(''); await tag.blur();
 		assert.equal(await exact.isVisible(), false);
 		await tag.fill('yqg6r7'); await tag.blur();
 		assert.ok(await tag.evaluate(input => input.classList.contains('cbi-input-invalid')));

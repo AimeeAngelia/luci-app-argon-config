@@ -36,6 +36,18 @@ npm install --prefix /tmp/argon-browser playwright-core
 NODE_PATH=/tmp/argon-browser/node_modules node tests/browser.cjs
 ```
 
+The following optional checks use the same Playwright setup. They require the corresponding disposable instance and should run sequentially on each instance because some change its configuration.
+
+| Script | Prerequisites and coverage |
+| --- | --- |
+| `wallpaper-browser.cjs` | English standalone page, default port 18082; validates filter edits, apply/reload, reset, keys, resolution and source switching |
+| `package-upgrade.sh old-app new-app old-language new-language` | Run inside OpenWrt with a compatible Argon 2.x theme; pass four actual APK or IPK paths, using the Chinese language packages; verifies upgrade preservation and installed files/RPC |
+| `integrated-browser.cjs` | English Argon 3 instance, default port 18084; set `EXPECT_PRIMARY` to its existing primary color (default `#345def`); checks native settings and hidden standalone route |
+| `readonly-browser.cjs` | English standalone instance, default port 18082; provision a login with read ACL groups and no write groups; set `LUCI_USERNAME` (default `argon-viewer`) and `LUCI_PASSWORD`; at least one background file must exist |
+| `login-background-browser.cjs` | An unauthenticated Argon 2.x login page; configure the source in the disposable instance first and set `EXPECT_BACKGROUND` (URL regex), `EXPECT_WIDTH` and `EXPECT_HEIGHT`; checks the image actually decoded by Chromium |
+
+`package-upgrade.sh` seeds custom settings and a file before upgrading, then compares their complete contents. It needs the old and new packages downloaded beforehand. It does not fetch releases or install the theme. The provider query test in `wallpaper-provider.sh` simulates HTTP; the login-image check can use a live source or a local fallback. Live provider checks are optional and do not run in CI.
+
 ## Configuration ownership and migration
 
 Argon 3.x owns `/etc/config/argon`, `view/argon-config.js`, `luci.argon`, and the original menu, ACL and translation names. This package uses separate names and does not ship the shared configuration file. Its pre-install script saves the existing configuration before upgrading from the old package. A UCI defaults script restores it and initializes only missing options on standalone installations. Explicit wallpaper choices take precedence over the legacy `bing_background` switch.

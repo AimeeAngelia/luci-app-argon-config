@@ -1,0 +1,226 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-argon-config 2.0.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: dingpengyu <jerrykuku@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Action"
+msgstr "操作"
+
+msgid "Argon Config"
+msgstr "Argon 主题设置"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:131
+msgid "Argon theme configuration"
+msgstr "Argon 主题设置"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:149
+msgid "Bing"
+msgstr "Bing"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:138
+#: htdocs/luci-static/resources/view/argon-config-app.js:143
+msgid "Dark mode"
+msgstr "暗黑模式"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:95
+#: htdocs/luci-static/resources/view/argon-config-app.js:124
+msgid "Delete"
+msgstr "删除"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:44
+#, javascript-format
+msgid "Expecting: %s"
+msgstr "请输入：%s"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Filename"
+msgstr "文件名"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:141
+msgid "Follow system"
+msgstr "跟随系统"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:137
+#: htdocs/luci-static/resources/view/argon-config-app.js:142
+msgid "Light mode"
+msgstr "亮色模式"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Modified date"
+msgstr "修改时间"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:127
+msgid "No files found."
+msgstr "没有找到文件。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:186
+msgid "Size"
+msgstr "大小"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:133
+msgid "Theme configuration"
+msgstr "主题配置"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:140
+msgid "Theme mode"
+msgstr "主题模式"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:150
+msgid "Unsplash"
+msgstr "Unsplash"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:198
+msgid "Upload background"
+msgstr "上传背景"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:151
+msgid "Wallhaven"
+msgstr "Wallhaven"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:147
+msgid "Wallpaper source"
+msgstr "壁纸来源"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:44
+msgid "valid HEX color value"
+msgstr "有效十六进制颜色值"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:21
+msgid "Invalid filename."
+msgstr "文件名无效。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:22
+#: htdocs/luci-static/resources/view/argon-config-app.js:67
+#: htdocs/luci-static/resources/view/argon-config-app.js:193
+msgid "Supported formats: GIF, JPEG, PNG, WebP, MP4 and WebM."
+msgstr "支持 GIF、JPEG、PNG、WebP、MP4 和 WebM 格式。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:23
+msgid "The uploaded file is missing or empty. Please upload it again."
+msgstr "上传文件不存在或为空，请重新上传。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:24
+msgid ""
+"A file with this name already exists. Rename the file or delete the old one "
+"first."
+msgstr "同名文件已存在，请重命名文件或先删除旧文件。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:25
+msgid "The operation failed. Check free space and directory permissions."
+msgstr "操作失败，请检查剩余空间和目录权限。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:28
+msgid "The operation failed. Please try again."
+msgstr "操作失败，请重试。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:56
+#: htdocs/luci-static/resources/view/argon-config-app.js:184
+msgid "Available space: %1024.2mB"
+msgstr "可用空间：%1024.2mB"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:57
+#: htdocs/luci-static/resources/view/argon-config-app.js:184
+msgid "Available space: unknown"
+msgstr "可用空间：未知"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:70
+msgid ""
+"Background uploaded. Select the local wallpaper source and save to use it."
+msgstr "背景已上传。选择本地壁纸来源并保存后即可使用。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:74
+msgid "Upload has been cancelled"
+msgstr "已取消上传"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:82
+msgid "Delete background"
+msgstr "删除背景"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:83
+#, javascript-format
+msgid "Delete \"%s\"? This cannot be undone."
+msgstr "确定删除“%s”吗？此操作无法撤销。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:85
+msgid "Cancel"
+msgstr "取消"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:107
+msgid "Close"
+msgstr "关闭"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:120
+msgid "Preview"
+msgstr "预览"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:132
+msgid ""
+"Customize the login page and manage local backgrounds. Changes take effect "
+"after Save & Apply."
+msgstr "自定义登录页面并管理本地背景，修改将在“保存并应用”后生效。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:136
+msgid "General"
+msgstr "常规"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:148
+msgid "Local backgrounds (built-in if empty)"
+msgstr "本地背景（为空时使用内置背景）"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:164
+msgid "Primary color"
+msgstr "主色调"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:166
+msgid "Use a HEX color such as #5e72e4 or #fff."
+msgstr "使用十六进制颜色值，例如 #5e72e4 或 #fff。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:169
+msgid "Transparency"
+msgstr "透明度"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:172
+msgid "0 is transparent; 1 is opaque."
+msgstr "0 为完全透明，1 为不透明。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:174
+msgid "Frosted glass radius"
+msgstr "毛玻璃模糊半径"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:177
+msgid "Blur radius in pixels, from 0 to 100."
+msgstr "模糊半径，单位为像素，范围为 0 至 100。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:192
+msgid "Local backgrounds"
+msgstr "本地背景"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:194
+msgid ""
+"Uploads and deletions take effect immediately and do not discard unsaved "
+"theme settings."
+msgstr "上传和删除立即生效，不会丢失尚未保存的主题设置。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:201
+msgid "Refresh"
+msgstr "刷新"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:152
+msgid ""
+"Local backgrounds are selected randomly. Online sources require Internet "
+"access."
+msgstr "随机使用已上传的本地背景，在线来源需要联网。"
+
+#: htdocs/luci-static/resources/view/argon-config-app.js:156
+msgid "Unsplash API key"
+msgstr "Unsplash API 密钥"

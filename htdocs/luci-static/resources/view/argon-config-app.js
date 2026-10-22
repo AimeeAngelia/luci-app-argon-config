@@ -102,13 +102,13 @@ function addWallpaperOptions(section) {
 	key.password = true;
 	key.retain = true;
 	key.depends('online_wallpaper', 'unsplash');
-	key.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^[1-9][0-9]*$/ });
+	key.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^\s*[1-9][0-9]*\s*$/ });
 	key.description = _('Unsplash requires its Access Key. For a Wallhaven tag search, use a Wallhaven API key or leave empty.');
 	key.validate = function(id, value) {
 		return source.formvalue(id) !== 'unsplash' || !!String(value || '').trim() || _('An Unsplash Access Key is required.');
 	};
 	var resolution = section.taboption('general', form.Flag, 'use_exact_resolution', _('Require exact resolution for Wallhaven'));
-	resolution.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^[1-9][0-9]*$/ });
+	resolution.depends({ online_wallpaper: 'wallhaven', wallhaven_tag: /^\s*[1-9][0-9]*\s*$/ });
 	resolution.default = '1';
 	resolution.rmempty = false;
 	resolution.retain = true;

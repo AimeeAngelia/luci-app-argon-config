@@ -53,7 +53,7 @@ const assert = require('node:assert/strict');
 		assert.equal(await exact.isVisible(), false);
 		await tag.fill('yqg6r7'); await tag.blur();
 		assert.ok(await tag.evaluate(input => input.classList.contains('cbi-input-invalid')));
-		await tag.fill('37'); await tag.blur();
+		await tag.fill(' 37 '); await tag.blur();
 		await exact.waitFor({ state: 'visible' });
 		await key.fill('');
 		await exact.uncheck();

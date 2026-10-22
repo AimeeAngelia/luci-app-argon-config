@@ -233,5 +233,6 @@ test('API keys are required for Unsplash and optional for Wallhaven tag searches
 	const condition = resolution.dependencies[0][0];
 	assert.equal(condition.online_wallpaper, 'wallhaven');
 	assert.equal(condition.wallhaven_tag.test('37'), true);
+	assert.equal(condition.wallhaven_tag.test(' 37 '), true);
 	assert.equal(condition.wallhaven_tag.test(''), false);
 });

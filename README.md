@@ -29,6 +29,31 @@ An independent project based on [jerrykuku/luci-app-argon-config](https://github
 
 The standalone settings page now supports Unsplash collection IDs, a numeric Wallhaven tag ID, optional Wallhaven API keys, and exact/minimum 1920x1080 tag searches. Existing encoded settings are read without losing IDs, and filters are kept when switching sources. These controls use the wallpaper RPC in Argon 2.4.8 or a compatible theme; Argon 3 uses its own settings page. See [filter behavior and compatibility](docs/ONLINE_WALLPAPER.md).
 
+## Screenshots
+
+Captured from version 2.1.0 on OpenWrt 25.12.6 / LuCI 25.12 with Argon 2.4.8 and demo settings. Argon 3 uses its integrated settings page instead.
+
+**Wallhaven filters and local background management** — set a numeric tag, choose exact or minimum resolution, and upload, preview or delete local files.
+
+![Wallhaven tag, API key and resolution controls with the local background file list](docs/screenshots/wallhaven-en.png)
+
+<details>
+<summary>More screenshots: Unsplash collections, dark appearance and background preview</summary>
+
+**Unsplash collections** — select a public collection and enter your Unsplash Access Key. The masked key shown here is a demo value.
+
+![Unsplash collection ID and masked demo Access Key](docs/screenshots/unsplash-en.png)
+
+**Dark appearance** — configure the dark mode primary color, transparency and frosted glass radius.
+
+![Dark mode color, transparency and blur controls](docs/screenshots/appearance-en.png)
+
+**Background preview** — inspect an uploaded image before using it on the login page.
+
+![Preview dialog showing the sample background bundled with the Argon theme](docs/screenshots/preview-en.png)
+
+</details>
+
 ## Installation
 
 Install a compatible Argon theme first and back up `/etc/config/argon`. Download the APK or IPK files from the latest [release](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest), then upload them to `/tmp`. Each release includes the main package, optional translations and `SHA256SUMS`. Development builds are also available as ZIP artifacts in [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions).

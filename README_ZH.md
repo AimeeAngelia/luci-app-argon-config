@@ -29,6 +29,31 @@
 
 独立设置页面新增 Unsplash 合集 ID、Wallhaven 数字标签 ID、可选 API 密钥，以及标签搜索的精确／最低 1920×1080 分辨率设置。兼容已有编码配置，切换来源时保留筛选值。这些控件使用 Argon 2.4.8 或兼容主题的壁纸 RPC；Argon 3 继续使用主题内置设置。详见[筛选规则与兼容性](docs/ONLINE_WALLPAPER.md)。
 
+## 界面截图
+
+以下为 2.1.0 在 OpenWrt 25.12.6 / LuCI 25.12、Argon 2.4.8 下的实际界面，使用演示配置。Argon 3 使用主题内置设置页面。
+
+**Wallhaven 筛选与本地背景管理**：设置数字标签，选择精确或最低分辨率，并上传、预览、删除本地背景。
+
+![Wallhaven 标签、API 密钥、分辨率设置和本地背景文件列表](docs/screenshots/wallhaven-zh.png)
+
+<details>
+<summary>展开更多截图：Unsplash 合集、暗色外观与背景预览</summary>
+
+**Unsplash 合集**：选择公开合集并填写 Unsplash 应用的 Access Key；截图中的隐藏密钥为演示值。
+
+![Unsplash 合集 ID 与隐藏的演示 Access Key](docs/screenshots/unsplash-zh.png)
+
+**暗色外观**：分别设置暗色模式的主题色、透明度和毛玻璃半径。
+
+![暗色模式的主题色、透明度和毛玻璃设置](docs/screenshots/appearance-zh.png)
+
+**背景预览**：上传后直接查看图片，再决定是否用于登录页。示例图片来自 Argon 主题内置背景。
+
+![背景预览对话框，展示 Argon 主题内置的示例图片](docs/screenshots/preview-zh.png)
+
+</details>
+
 ## 安装与升级
 
 先备份配置，并安装与你系统兼容的 Argon 主题：

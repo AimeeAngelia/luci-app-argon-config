@@ -19,14 +19,21 @@ An independent project based on [jerrykuku/luci-app-argon-config](https://github
 
 - General, light and dark settings tabs with color and numeric validation.
 - Standard LuCI Save, Save & Apply and Reset actions.
+- Unsplash collection filters and Wallhaven tag, API key and resolution settings on compatible themes.
 - Image/video uploads, previews, confirmed deletion and available storage display.
 - File list updates preserve unsaved settings.
 - Duplicate uploads are rejected, failures are reported, and read-only users cannot change files.
 - Existing configuration is preserved during upgrades, including migration of the legacy Bing switch.
 
+## Online wallpaper filters (2.1.0)
+
+The standalone settings page now supports Unsplash collection IDs, a numeric Wallhaven tag ID, optional Wallhaven API keys, and exact/minimum 1920x1080 tag searches. Existing encoded settings are read without losing IDs, and filters are kept when switching sources. These controls use the wallpaper RPC in Argon 2.4.8 or a compatible theme; Argon 3 uses its own settings page. See [filter behavior and compatibility](docs/ONLINE_WALLPAPER.md).
+
 ## Installation
 
 Install a compatible Argon theme first and back up `/etc/config/argon`. Download the APK or IPK files from the latest [release](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest), then upload them to `/tmp`. Each release includes the main package, optional translations and `SHA256SUMS`. Development builds are also available as ZIP artifacts in [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions).
+
+The commands below install the currently published 2.0.0 release; build the 2.1.0 candidate to use the new filter controls.
 
 OpenWrt 25.12:
 

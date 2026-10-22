@@ -19,10 +19,15 @@
 
 - 常规、亮色、暗色设置分栏；校验颜色、透明度和模糊半径。
 - 使用 LuCI 标准的“保存”“保存并应用”“重置”流程。
+- 在兼容主题中设置 Unsplash 合集，以及 Wallhaven 标签、API 密钥和分辨率筛选。
 - 上传图片、视频，预览背景，确认删除，查看剩余空间。
 - 上传和删除后刷新文件列表，不整页重载，不丢失未保存的表单。
 - 上传重名时拒绝覆盖，失败时显示原因；只读账户不能修改文件。
 - 升级保留现有配置，迁移旧版 `bing_background` 设置。
+
+## 在线壁纸筛选（2.1.0）
+
+独立设置页面新增 Unsplash 合集 ID、Wallhaven 数字标签 ID、可选 API 密钥，以及标签搜索的精确／最低 1920×1080 分辨率设置。兼容已有编码配置，切换来源时保留筛选值。这些控件使用 Argon 2.4.8 或兼容主题的壁纸 RPC；Argon 3 继续使用主题内置设置。详见[筛选规则与兼容性](docs/ONLINE_WALLPAPER.md)。
 
 ## 安装与升级
 
@@ -33,6 +38,8 @@ cp -p /etc/config/argon /tmp/argon.backup
 ```
 
 从[最新发行版](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest)直接下载 APK 或 IPK，上传到路由器 `/tmp`。每次发行包含主包、可选语言包及 `SHA256SUMS` 校验文件。开发构建仍可在 [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) 中下载 ZIP 附件。
+
+以下命令对应当前已发布的 2.0.0；使用新增筛选功能需构建 2.1.0 候选版。
 
 OpenWrt 25.12：
 

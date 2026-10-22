@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-这是 [jerrykuku/luci-app-argon-config](https://github.com/jerrykuku/luci-app-argon-config) 的独立维护版本，针对当前正式版 OpenWrt 和 JavaScript LuCI 重构，支持 APK 和 IPK。
+这是基于 [jerrykuku/luci-app-argon-config](https://github.com/jerrykuku/luci-app-argon-config) 持续维护的独立项目，已脱离 GitHub 复刻网络。项目针对当前正式版 OpenWrt 和 JavaScript LuCI 重构，支持 APK 和 IPK。
 
 ## 兼容性
 

@@ -27,6 +27,7 @@ cp -R /src/htdocs /src/po /src/root /src/Makefile package/luci-app-argon-config/
 
 # The SDK ships CONFIG_ALL=y. Keep its target selection, then select only
 # this app and its languages instead of packaging every optional subpackage.
+[ -f .config ] || make defconfig
 sed -n '/^CONFIG_TARGET_/p; /^CONFIG_SDK[=_]/p' .config > .config.argon
 mv .config.argon .config
 cat >> .config <<'CONFIG'

@@ -2,7 +2,7 @@
 
 English | [简体中文](README_ZH.md)
 
-An independently maintained fork of [jerrykuku/luci-app-argon-config](https://github.com/jerrykuku/luci-app-argon-config), rebuilt for current stable OpenWrt and JavaScript LuCI.
+An independent project based on [jerrykuku/luci-app-argon-config](https://github.com/jerrykuku/luci-app-argon-config), rebuilt for current stable OpenWrt and JavaScript LuCI. This repository is maintained separately from the upstream fork network.
 
 ## Compatibility
 

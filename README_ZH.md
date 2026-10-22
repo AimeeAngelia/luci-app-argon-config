@@ -32,7 +32,7 @@
 cp -p /etc/config/argon /tmp/argon.backup
 ```
 
-从本仓库 [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) 下载成功构建的附件，解压后上传到路由器 `/tmp`。正式发布后也可从 [Releases](https://github.com/AimeeAngelia/luci-app-argon-config/releases) 下载。
+从[最新发行版](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest)直接下载 APK 或 IPK，上传到路由器 `/tmp`。每次发行包含主包、可选语言包及 `SHA256SUMS` 校验文件。开发构建仍可在 [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) 中下载 ZIP 附件。
 
 OpenWrt 25.12：
 
@@ -67,7 +67,7 @@ make package/luci-app-argon-config/compile V=s
 
 生成 APK 或 IPK 由 SDK 决定，不要手工改扩展名。不要同时加入 Argon 3 源码下同名的 `compat/luci-app-argon-config` 迁移包。
 
-Docker 构建及验证方法见 [开发说明](docs/DEVELOPMENT.md)。CI 同时构建两种格式；发布工作流仅生成草稿发行。
+Docker 构建及验证方法见 [开发说明](docs/DEVELOPMENT.md)。CI 同时构建两种格式。推送与 Makefile 版本对应的标签（例如 `v2.0.0`）后，全部检查通过才会公开发布到 Releases；也可在 Release 工作流中手动填写标签发布。APK、IPK 使用发行附件分发，因为 [GitHub Packages 不提供这两种格式的原生仓库](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries)。
 
 ## 致谢
 

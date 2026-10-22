@@ -58,6 +58,6 @@ Write RPC methods are granted only in the write ACL. Uploads use separate tempor
 
 ## Publishing
 
-Push a tag matching `PKG_VERSION` and `PKG_RELEASE`, such as `v2.0.0`, `v2.0.0-r1` or `release-2.0.0-r1`, or run the Release workflow manually with a matching tag name. The selected workflow ref is the source of the binaries. Both stable SDK builds and tests must succeed before the public release is created.
+Push a tag matching `PKG_VERSION` and `PKG_RELEASE`, such as `v2.1.0`, `v2.1.0-r1` or `release-2.1.0-r1`, or run the Release workflow manually with a matching tag name. The selected workflow ref is the source of the binaries. Both stable SDK builds and tests must succeed before the public release is created.
 
 The publisher requires both main package formats, attaches the translations and generates `SHA256SUMS` using asset basenames. A rerun can complete an existing release, but a tag pointing to another commit is rejected so that manual dispatches cannot replace its binaries with builds from another revision. Existing release notes are preserved on reruns.

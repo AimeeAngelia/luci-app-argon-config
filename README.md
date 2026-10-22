@@ -33,21 +33,19 @@ The standalone settings page now supports Unsplash collection IDs, a numeric Wal
 
 Install a compatible Argon theme first and back up `/etc/config/argon`. Download the APK or IPK files from the latest [release](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest), then upload them to `/tmp`. Each release includes the main package, optional translations and `SHA256SUMS`. Development builds are also available as ZIP artifacts in [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions).
 
-The commands below install the currently published 2.0.0 release; build the 2.1.0 candidate to use the new filter controls.
-
 OpenWrt 25.12:
 
 ```sh
-apk add --allow-untrusted /tmp/luci-app-argon-config-2.0.0-r1.apk
+apk add --allow-untrusted /tmp/luci-app-argon-config-2.1.0-r1.apk
 # Optional Simplified Chinese translation
-apk add --allow-untrusted /tmp/luci-i18n-argon-config-app-zh-cn-2.0.0-r1.apk
+apk add --allow-untrusted /tmp/luci-i18n-argon-config-app-zh-cn-2.1.0-r1.apk
 ```
 
 OpenWrt 24.10:
 
 ```sh
-opkg install /tmp/luci-app-argon-config_2.0.0-r1_all.ipk
-opkg install /tmp/luci-i18n-argon-config-app-zh-cn_2.0.0-r1_all.ipk
+opkg install /tmp/luci-app-argon-config_2.1.0-r1_all.ipk
+opkg install /tmp/luci-i18n-argon-config-app-zh-cn_2.1.0-r1_all.ipk
 ```
 
 Use the actual filenames from your build. Translations now use `luci-i18n-argon-config-app-*` to avoid colliding with Argon 3.x translations. Log in to LuCI again after installation. The standalone page is `/cgi-bin/luci/admin/system/argon-config-app`. To use uploaded backgrounds, choose the local wallpaper source and Save & Apply. The theme randomly selects from multiple local files.
@@ -62,6 +60,6 @@ Add this repository and the Argon theme to a matching OpenWrt SDK/buildroot, sel
 make package/luci-app-argon-config/compile V=s
 ```
 
-The SDK selects APK or IPK. Do not also include Argon 3's `compat/luci-app-argon-config` recipe with the same package name. See [development and validation](docs/DEVELOPMENT.md) for Docker builds and tests. CI builds both formats. Pushing a version tag such as `v2.0.0` publishes both formats to Releases after all checks pass. The Release workflow can also be run manually with a matching tag name. APK and IPK are distributed as release assets because [GitHub Packages does not provide a native registry for these formats](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries).
+The SDK selects APK or IPK. Do not also include Argon 3's `compat/luci-app-argon-config` recipe with the same package name. See [development and validation](docs/DEVELOPMENT.md) for Docker builds and tests. CI builds both formats. Pushing a version tag such as `v2.1.0` publishes both formats to Releases after all checks pass. The Release workflow can also be run manually with a matching tag name. APK and IPK are distributed as release assets because [GitHub Packages does not provide a native registry for these formats](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries).
 
 Based on work by Jerrykuku and the original contributors, under Apache-2.0. [Argon theme upstream](https://github.com/jerrykuku/luci-theme-argon).

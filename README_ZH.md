@@ -39,21 +39,19 @@ cp -p /etc/config/argon /tmp/argon.backup
 
 从[最新发行版](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest)直接下载 APK 或 IPK，上传到路由器 `/tmp`。每次发行包含主包、可选语言包及 `SHA256SUMS` 校验文件。开发构建仍可在 [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) 中下载 ZIP 附件。
 
-以下命令对应当前已发布的 2.0.0；使用新增筛选功能需构建 2.1.0 候选版。
-
 OpenWrt 25.12：
 
 ```sh
-apk add --allow-untrusted /tmp/luci-app-argon-config-2.0.0-r1.apk
+apk add --allow-untrusted /tmp/luci-app-argon-config-2.1.0-r1.apk
 # 可选：简体中文语言包，文件名以实际产物为准
-apk add --allow-untrusted /tmp/luci-i18n-argon-config-app-zh-cn-2.0.0-r1.apk
+apk add --allow-untrusted /tmp/luci-i18n-argon-config-app-zh-cn-2.1.0-r1.apk
 ```
 
 OpenWrt 24.10：
 
 ```sh
-opkg install /tmp/luci-app-argon-config_2.0.0-r1_all.ipk
-opkg install /tmp/luci-i18n-argon-config-app-zh-cn_2.0.0-r1_all.ipk
+opkg install /tmp/luci-app-argon-config_2.1.0-r1_all.ipk
+opkg install /tmp/luci-i18n-argon-config-app-zh-cn_2.1.0-r1_all.ipk
 ```
 
 语言包名称改为 `luci-i18n-argon-config-app-*`，以免与 Argon 3.x 的语言包同名。旧插件升级时，安装脚本会先保存配置，再交给新的初始化脚本恢复。使用新版主题时也保留配置；主题负责自己的配置文件。
@@ -74,7 +72,7 @@ make package/luci-app-argon-config/compile V=s
 
 生成 APK 或 IPK 由 SDK 决定，不要手工改扩展名。不要同时加入 Argon 3 源码下同名的 `compat/luci-app-argon-config` 迁移包。
 
-Docker 构建及验证方法见 [开发说明](docs/DEVELOPMENT.md)。CI 同时构建两种格式。推送与 Makefile 版本对应的标签（例如 `v2.0.0`）后，全部检查通过才会公开发布到 Releases；也可在 Release 工作流中手动填写标签发布。APK、IPK 使用发行附件分发，因为 [GitHub Packages 不提供这两种格式的原生仓库](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries)。
+Docker 构建及验证方法见 [开发说明](docs/DEVELOPMENT.md)。CI 同时构建两种格式。推送与 Makefile 版本对应的标签（例如 `v2.1.0`）后，全部检查通过才会公开发布到 Releases；也可在 Release 工作流中手动填写标签发布。APK、IPK 使用发行附件分发，因为 [GitHub Packages 不提供这两种格式的原生仓库](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries)。
 
 ## 致谢
 

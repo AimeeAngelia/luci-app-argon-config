@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag matching Makefile, e.g. v2.0.0 or v2.0.0-r1'
+        description: 'Release tag matching Makefile, e.g. v2.1.0 or v2.1.0-r1'
         required: true
         type: string
 

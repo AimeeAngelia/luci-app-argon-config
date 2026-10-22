@@ -26,7 +26,7 @@ An independent project based on [jerrykuku/luci-app-argon-config](https://github
 
 ## Installation
 
-Install a compatible Argon theme first and back up `/etc/config/argon`. Download and extract a successful build from [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions) or a published [release](https://github.com/AimeeAngelia/luci-app-argon-config/releases), then upload packages to `/tmp`.
+Install a compatible Argon theme first and back up `/etc/config/argon`. Download the APK or IPK files from the latest [release](https://github.com/AimeeAngelia/luci-app-argon-config/releases/latest), then upload them to `/tmp`. Each release includes the main package, optional translations and `SHA256SUMS`. Development builds are also available as ZIP artifacts in [Actions](https://github.com/AimeeAngelia/luci-app-argon-config/actions).
 
 OpenWrt 25.12:
 
@@ -55,6 +55,6 @@ Add this repository and the Argon theme to a matching OpenWrt SDK/buildroot, sel
 make package/luci-app-argon-config/compile V=s
 ```
 
-The SDK selects APK or IPK. Do not also include Argon 3's `compat/luci-app-argon-config` recipe with the same package name. See [development and validation](docs/DEVELOPMENT.md) for Docker builds and tests. CI builds both formats; tag releases are created as drafts.
+The SDK selects APK or IPK. Do not also include Argon 3's `compat/luci-app-argon-config` recipe with the same package name. See [development and validation](docs/DEVELOPMENT.md) for Docker builds and tests. CI builds both formats. Pushing a version tag such as `v2.0.0` publishes both formats to Releases after all checks pass. The Release workflow can also be run manually with a matching tag name. APK and IPK are distributed as release assets because [GitHub Packages does not provide a native registry for these formats](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#support-for-package-registries).
 
 Based on work by Jerrykuku and the original contributors, under Apache-2.0. [Argon theme upstream](https://github.com/jerrykuku/luci-theme-argon).
